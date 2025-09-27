@@ -34,7 +34,7 @@ interactiveElements.forEach(el => {
 });
 
 // Smooth scrolling navigation
-const navLinks = document.querySelectorAll('nav a');
+const navLinks = document.querySelectorAll('nav a:not(.cv-download-btn)');
 navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -51,6 +51,50 @@ navLinks.forEach(link => {
             block: 'start'
         });
     });
+});
+
+// CV Download functionality
+const cvDownloadBtn = document.querySelector('.cv-download-btn');
+cvDownloadBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    
+    // Change button text temporarily
+    const originalText = cvDownloadBtn.textContent;
+    cvDownloadBtn.textContent = 'Downloading...';
+    cvDownloadBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+    
+    // Create download link (replace 'path/to/your/cv.pdf' with actual path)
+    const link = document.createElement('a');
+    link.href = './cv/Harith_Rajapaksha_CV.pdf'; // Update this path to your CV file
+    link.download = 'Harith_Rajapaksha_CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Reset button after download
+    setTimeout(() => {
+        cvDownloadBtn.textContent = originalText;
+        cvDownloadBtn.style.background = 'var(--gradient)';
+    }, 1500);
+});
+
+// Project card GitHub navigation
+const projectCards = document.querySelectorAll('.project-card');
+projectCards.forEach(card => {
+    card.addEventListener('click', () => {
+        const githubUrl = card.getAttribute('data-github');
+        if (githubUrl) {
+            // Add clicking animation
+            card.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                card.style.transform = '';
+                window.open(githubUrl, '_blank');
+            }, 150);
+        }
+    });
+    
+    // Add cursor pointer style
+    card.style.cursor = 'pointer';
 });
 
 // Scroll progress indicator
@@ -206,5 +250,3 @@ document.addEventListener('touchmove', (e) => {
     cursor.style.left = touch.clientX + 'px';
     cursor.style.top = touch.clientY + 'px';
 });
-
-

@@ -90,6 +90,23 @@ nav a:hover, nav a.active {
     transform: translateY(-2px);
 }
 
+/* CV Download Button Styles */
+.cv-download-btn {
+    background: var(--gradient) !important;
+    color: white !important;
+    font-weight: 600;
+    padding: 8px 20px !important;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.cv-download-btn:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5) !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
 /* Hero Section with Better Background */
 .hero {
     height: 100vh;
@@ -136,41 +153,6 @@ nav a:hover, nav a.active {
     );
     z-index: 1;
 }
-
-/* Alternative background styles - uncomment one that works best */
-
-/* Option 1: Subtle background */
-/*
-.hero::before {
-    background-image: url('your-image.jpg');
-    opacity: 0.15;
-    filter: blur(2px) brightness(0.7);
-}
-*/
-
-/* Option 2: Strong background with better contrast */
-/*
-.hero::before {
-    background-image: url('your-image.jpg');
-    opacity: 0.6;
-    filter: brightness(0.4) contrast(1.2);
-}
-.hero::after {
-    background: radial-gradient(circle at center, transparent 30%, rgba(10, 10, 26, 0.8) 100%);
-}
-*/
-
-/* Option 3: Split screen effect */
-/*
-.hero::before {
-    background-image: url('your-image.jpg');
-    opacity: 0.4;
-    clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
-}
-.hero::after {
-    background: linear-gradient(90deg, transparent 0%, rgba(10, 10, 26, 0.9) 50%, rgba(10, 10, 26, 0.95) 100%);
-}
-*/
 
 .hero-content {
     z-index: 2;
@@ -425,6 +407,7 @@ section {
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
     position: relative;
+    cursor: pointer;
 }
 
 .project-card:hover {
@@ -432,11 +415,36 @@ section {
     box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
 }
 
+.project-card::after {
+    content: '🔗 View on GitHub';
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(99, 102, 241, 0.9);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.project-card:hover::after {
+    opacity: 1;
+}
+
 .project-image {
     height: 200px;
     background: var(--gradient);
     position: relative;
     overflow: hidden;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .project-image::before {
@@ -625,5 +633,16 @@ textarea.form-input {
             rgba(15, 15, 35, 0.8) 50%,
             rgba(10, 10, 26, 0.9) 100%
         );
+    }
+    
+    /* Mobile navigation adjustments */
+    nav ul {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .cv-download-btn {
+        font-size: 0.9rem;
+        padding: 6px 16px !important;
     }
 }
